@@ -1,0 +1,30 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "c:\\Program Files\\Java\\jdk-17\\lib\\jrt-fs.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\charsets.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\deploy.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\javaws.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\jce.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\jfr.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\jfxswt.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\jsse.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\management-agent.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\plugin.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\resources.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_111\\lib\\rt.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\charsets.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\deploy.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\javaws.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\jce.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\jfr.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\jsse.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\management-agent.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\plugin.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\resources.jar",
+        "c:\\Program Files\\Java\\jre1.8.0_451\\lib\\rt.jar"
+    ],
+    "java.format.settings.url": ".vscode/java-formatter.xml"
+}
