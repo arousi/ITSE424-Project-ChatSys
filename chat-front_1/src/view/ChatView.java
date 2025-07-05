@@ -25,8 +25,23 @@ public class ChatView {
     HBox hbox1 = new HBox(sendButton, reconnectButton);
     public VBox getLayout() {
         chatArea.setEditable(false);
-        VBox root = new VBox(10, chatArea, inputField, hbox1);
-        root.setStyle("-fx-padding: 10;");
+        chatArea.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-color: #cccccc;");
+
+        inputField.setPromptText("Type your message here...");
+        inputField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 200) {
+                inputField.setText(oldValue); // Limit message length to 200 characters
+            }
+        });
+
+        Label header = new Label("Chat System");
+        header.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10; -fx-background-color: #f0f0f0;");
+
+        Label columnHeaders = new Label(String.format("%-15s %-25s %-25s", "Sender", "Message", "Timestamp"));
+        columnHeaders.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5; -fx-background-color: #e0e0e0;");
+
+        VBox root = new VBox(10, header, columnHeaders, chatArea, inputField, hbox1);
+        root.setStyle("-fx-padding: 10; -fx-background-color: #f9f9f9;");
         return root;
     }
 }

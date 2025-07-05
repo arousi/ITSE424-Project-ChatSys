@@ -18,6 +18,7 @@ import model.ChatModel;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.scene.input.KeyCode;
+import java.time.LocalDateTime;
 
 public class ChatController {
     public ChatController(ChatModel model, ChatView view, ChatService proxy) {
@@ -26,7 +27,7 @@ public class ChatController {
 
         view.reconnectButton.setOnAction(e -> {
             proxy.connect("localhost", 1234, model); // or server IP
-            model.addMessage("[System] Attempting to reconnect...");
+            model.addMessage("System", LocalDateTime.now().toString(), "Attempting to reconnect...");
         });
         
         // Enter key press
@@ -36,22 +37,19 @@ public class ChatController {
             }
         });
 
-        // Observer for updating the chat area
-        model.addObserver(new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                view.chatArea.appendText(arg.toString() + "\n");
+        // PropertyChangeListener for updating the chat area
+        model.addPropertyChangeListener(evt -> {
+            if ("message".equals(evt.getPropertyName())) {
+                view.chatArea.appendText(evt.getNewValue().toString() + "\n");
             }
         });
     }
-    
-    
 
     private void sendMessage(ChatModel model, ChatView view, ChatService proxy) {
         String msg = view.inputField.getText().trim(); // trim to avoid sending spaces
         if (!msg.isEmpty()) {
             String fullMsg = MessageFactory.createMessage("You", msg);
-            model.addMessage(fullMsg);
+            model.addMessage("You", LocalDateTime.now().toString(), msg);
             proxy.sendMessage(msg);
             view.inputField.clear();
         }

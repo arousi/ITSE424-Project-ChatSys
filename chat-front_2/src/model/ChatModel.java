@@ -10,27 +10,35 @@ package model;
  * @author Sanad
  */
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Observable;
 import java.util.Set;
 
-// Observable Pattern
-public class ChatModel extends Observable {
+public class ChatModel {
     private final List<String> messages = new ArrayList<>();
-    private Set<String> messageHistory = new HashSet<>();
+    private final Set<String> messageHistory = new HashSet<>();
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public void addMessage(String msg) {
-        if (messageHistory.add(msg)) { // adds only if new
-            messages.add(msg);
-            setChanged();
-            notifyObservers(msg);
+    public void addMessage(String sender, String timestamp, String content) {
+        String formattedMessage = String.format("%-15s %-25s %-25s", sender, content, timestamp);
+        if (messageHistory.add(formattedMessage)) { // adds only if new
+            messages.add(formattedMessage);
+            support.firePropertyChange("message", null, formattedMessage);
         }
     }
-    
 
     public List<String> getMessages() {
         return messages;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        support.removePropertyChangeListener(listener);
     }
 }

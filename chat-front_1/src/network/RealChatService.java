@@ -13,6 +13,7 @@ package network;
 import model.ChatModel;
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDateTime;
 
 public class RealChatService implements ChatService {
     private Socket socket;
@@ -36,16 +37,17 @@ public class RealChatService implements ChatService {
                 while ((line = in.readLine()) != null) {
                     // 👇 Skip messages the client sent itself
                     if (!line.contains(myAddress)) {
-                        model.addMessage("[Peer] " + line);
+                        String sender = socket.getInetAddress().getHostAddress();
+                        model.addMessage(sender, LocalDateTime.now().toString(), line);
                     }
                 }
             } catch (IOException e) {
-                model.addMessage("[System] Disconnected from server.");
+                model.addMessage("System", LocalDateTime.now().toString(), "Disconnected from server.");
             }
         }).start();
 
     } catch (IOException e) {
-        model.addMessage("[Error] " + e.getMessage());
+        model.addMessage("Error", LocalDateTime.now().toString(), e.getMessage());
     }
 }
 
@@ -61,8 +63,8 @@ public class RealChatService implements ChatService {
             String line;
             try {
                 while ((line = in.readLine()) != null) {
-                    String fullMsg = "[Peer] " + line;
-                    this.model.addMessage(fullMsg);
+                    String sender = socket.getInetAddress().getHostAddress();
+                    model.addMessage(sender, LocalDateTime.now().toString(), line);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

@@ -50,4 +50,21 @@
     nbproject/build-impl.xml and nbproject/jfx-impl.xml.
 
     -->
+
+    <target name="-pre-init">
+        <property name="javafx.runtime.jar" value="${java.home}/lib/jfxrt.jar"/>
+        <path id="javafx.classpath">
+            <pathelement location="${javafx.runtime.jar}"/>
+        </path>
+    </target>
+
+    <target name="-pre-compile">
+        <mkdir dir="${build.classes.dir}"/>
+        <javac includeantruntime="false" destdir="${build.classes.dir}" source="1.8" target="1.8">
+            <classpath>
+                <path refid="javafx.classpath"/>
+            </classpath>
+            <src path="${src.dir}"/>
+        </javac>
+    </target>
 </project>

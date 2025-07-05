@@ -20,7 +20,23 @@ public class ClientProxy implements ChatService {
     @Override
     public void connect(String host, int port, ChatModel model) {
         System.out.println("Proxy: Connecting to server...");
-        realService.connect(host, port, model);
+        int retries = 3;
+        while (retries > 0) {
+            try {
+                realService.connect(host, port, model);
+                System.out.println("Proxy: Connection successful.");
+                return;
+            } catch (Exception e) {
+                retries--;
+                System.out.println("Proxy: Connection failed. Retrying... (" + retries + " attempts left)");
+                try {
+                    Thread.sleep(2000); // Wait before retrying
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+        System.out.println("Proxy: Failed to connect after multiple attempts.");
     }
 
     @Override

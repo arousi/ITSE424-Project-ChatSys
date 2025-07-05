@@ -35,11 +35,11 @@ public class ClientHandler implements Runnable {
             while (active && (line = in.readLine()) != null) {
                 server.broadcast("[" + id + "]: " + line);
             }
-
         } catch (IOException e) {
-            server.broadcast("Client " + id + " disconnected.");
+            server.broadcast("Client " + id + " disconnected due to an error: " + e.getMessage());
         } finally {
             stop();
+            server.broadcast("Client " + id + " cleanup completed.");
         }
     }
 
@@ -55,6 +55,10 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             server.broadcast("Error closing client " + id);
         }
+    }
+
+    public String getId() {
+        return id;
     }
 }
 
