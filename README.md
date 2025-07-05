@@ -24,7 +24,13 @@ Despite some minor errors when restarting the server and reconnecting the client
 
 ## Known Issues
 
-- **Server Restart**: Minor errors occur when restarting the server and reconnecting the clients.
+- **Server Restart**: Minor errors occur when restarting the server and reconnecting the clients. (solved)
+- **Client UI not dynamic nor tidy**
+- **No Logging**
+- **No user accounts system**
+- **No message history persistence**
+- **No group messaging support**
+- **No ability to choose which person to chat with**
 
 ## Project Structure
 
